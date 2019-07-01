@@ -19,3 +19,15 @@ print("Число", number, "в степени 2 =", number**2)
 # Решите задачу, используя только две переменные.
 # Подсказки:
 # * постарайтесь сделать решение через действия над числами;
+
+print("\nЗадача 1\n")
+
+number1 = int(input("Введите  первое число: "))
+number2 = int(input("Введите  второе число: "))
+
+number1 = number1 + number2
+number2 = number1 - number2
+number1 = number1 - number2
+
+print("Первое число сейчас:", number1)
+print("Второе число сейчас:", number2)
