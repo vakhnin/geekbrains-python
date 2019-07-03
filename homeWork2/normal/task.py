@@ -92,7 +92,7 @@ for date in datesArr:
 
 import random
 
-print("\nЗадача-1\n")
+print("\nЗадача-3\n")
 
 n = 15
 randNumbersArr = []
@@ -108,3 +108,18 @@ print(randNumbersArr)
 # например, lst = [1, 2, 4, 5, 6, 2, 5, 2], нужно получить lst2 = [1, 2, 4, 5, 6]
 # б) элементы исходного списка, которые не имеют повторений:
 # например, lst = [1 , 2, 4, 5, 6, 2, 5, 2], нужно получить lst2 = [1, 4, 6]
+
+print("\nЗадача-4\n")
+
+lst = [1, 2, 4, 5, 6, 2, 5, 2]
+
+print("Элементы списка, без повторов:")
+print(set(lst))
+
+notDoubleItemsArr = []
+for item in set(lst):
+    if lst.count(item) == 1:
+        notDoubleItemsArr.append(item)
+
+print("Элементы списка, которые не имеют повторений:")
+print(notDoubleItemsArr)
