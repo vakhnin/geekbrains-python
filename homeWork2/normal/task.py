@@ -4,6 +4,19 @@
 # но только если результаты извлечения корня не имеют десятичной части и
 # если такой корень вообще можно извлечь
 # Пример: Дано: [2, -5, 8, 9, -25, 25, 4]   Результат: [3, 5, 2]
+import math
+
+print("\nЗадача-1\n")
+
+numArr = [2, -5, 8, 9, -25, 25, 4]
+resArr = []
+for num in numArr:
+    if num >= 0:
+        sqrtNum = math.sqrt(num)
+        if  sqrtNum == int(sqrtNum):
+            resArr.append(int(sqrtNum))
+
+print(resArr)
 
 
 # Задача-2: Дана дата в формате dd.mm.yyyy, например: 02.11.2013.
