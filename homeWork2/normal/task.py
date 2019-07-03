@@ -90,6 +90,17 @@ for date in datesArr:
 # Подсказка:
 # для получения случайного числа используйте функцию randint() модуля random
 
+import random
+
+print("\nЗадача-1\n")
+
+n = 15
+randNumbersArr = []
+
+for _ in range(n):
+    randNumbersArr.append(random.randint(-100, 100))
+
+print(randNumbersArr)
 
 # Задача-4: Дан список, заполненный произвольными целыми числами.
 # Получите новый список, элементами которого будут:
