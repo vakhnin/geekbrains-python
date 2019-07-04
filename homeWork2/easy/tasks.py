@@ -13,6 +13,20 @@
 
 # Подсказка: воспользоваться методом .format()
 
+print("\nЗадача-1\n")
+
+friuts = ["яблоко", "банан", "киви", "арбуз"]
+
+maxLen = 0
+for friut in friuts:
+    if len(friut) > maxLen:
+        maxLen = len(friut)
+
+i = 1
+formatStr = "{}.{:>" + str(maxLen+1) + "}"
+for friut in friuts:
+    print(formatStr.format(i, friut))
+    i += 1
 
 # Задача-2:
 # Даны два произвольные списка.
