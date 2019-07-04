@@ -90,7 +90,7 @@ for date in datesArr:
 # Подсказка:
 # для получения случайного числа используйте функцию randint() модуля random
 
-import random
+import random  # Про то, что import нужно помещать в начало кода знаю. Перенес import ближе к задаче для наглядности.
 
 print("\nЗадача-3\n")
 
