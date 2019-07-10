@@ -1,0 +1,1 @@
+name:player1,health:110,damage:80,armor:1.2
