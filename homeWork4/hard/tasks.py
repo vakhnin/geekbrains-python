@@ -31,7 +31,8 @@ def check_account(person):
 
 
 def withdraw_money(person, money):
-    if person['money'] - money == 0:
+    # Тут было сравнение на равенство с нулем, а не больше или равно
+    if person['money'] - money >= 0:
         person['money'] -= money
         return 'Вы сняли {} рублей.'.format(money)
     else:
@@ -39,27 +40,43 @@ def withdraw_money(person, money):
 
 
 def process_user_choice(choice, person):
-    if choice == '1':
+    # Тут было сравниение с неверным типом данных, строкой вместо числа
+    if choice == 1:
         print(check_account(person))
-    elif choice == '2':
-        count = float(input('Сумма к снятию:'))
+    elif choice == 2:
+        # Ввод неверных данных не должен приводить к краху программы.
+        try:
+            count = float(input('Сумма к снятию:'))
+        except ValueError:
+            print("Неверная сумма. Попробуйте еще раз.")
+            return
         print(withdraw_money(person, count))
 
 
 def start():
-    card_number, pin_code = input('Введите номер карты и пин код через пробел:').split()
+    # Ввод неверных данных не должен приводить к краху программы.
+    try:
+        card_number, pin_code = input('Введите номер карты и пин код через пробел:').split()
 
-    card_number = int(card_number)
-    pin_code = int(pin_code)
+        card_number = int(card_number)
+        pin_code = int(pin_code)
+    except ValueError:
+        print("Неверные номер карты и(или) пин код. Попробуйте еще раз.")
+        return
+
     person = get_person_by_card(card_number)
     if person and is_pin_valid(person, pin_code):
         while True:
-            choice = int(input('Выберите пункт:\n'
-                               '1. Проверить баланс\n'
-                               '2. Снять деньги\n'
-                               '3. Выход\n'
-                               '---------------------\n'
-                               'Ваш выбор:'))
+            # Ввод неверных данных не должен приводить к краху программы.
+            try:
+                choice = int(input('Выберите пункт:\n'
+                                   '1. Проверить баланс\n'
+                                   '2. Снять деньги\n'
+                                   '3. Выход\n'
+                                   '---------------------\n'
+                                   'Ваш выбор:'))
+            except ValueError:
+                break
             if choice == 3:
                 break
             process_user_choice(choice, person)
@@ -67,4 +84,6 @@ def start():
         print('Номер карты или пин код введены не верно!')
 
 
-start()
+# По логике, программа банкомата должна крутится в цикле
+while True:
+    start()
