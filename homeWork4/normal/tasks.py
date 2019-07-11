@@ -6,6 +6,33 @@
 # Например:
 # Пупкин василий - неверно указано имя, te$T@test.net - неверно указан email (спецсимвол, заглавная буква, .net), te_4_st@test.com - верно указан.
 
+import re
+
+print("\nЗадача-1\n")
+
+name_re = r"^[A-ZА-ЯЁ][a-zа-яё]+$"
+email_re = r"^[a-z][a-z0-9_]*@[a-z0-9]+\.(com|org|ru)$"
+
+name = input("Введите имя:")
+surname = input("Введите фамилию:")
+email = input("Введите e-mail:")
+
+if re.match(name_re, name):
+    print("Имя указано верно.")
+else:
+    print("Имя указано не верно.")
+
+if re.match(name_re, surname):
+    print("Фамилия указана верно.")
+else:
+    print("Фамилия указана не верно.")
+
+if re.match(email_re, email):
+    print("E-mail указан верно.")
+else:
+    print("E-mail указан не верно.")
+
+
 # Задача - 2:
 # Вам дан текст:
 
