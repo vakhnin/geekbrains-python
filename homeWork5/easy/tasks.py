@@ -44,5 +44,16 @@ else:
 # # Задача-2:
 # Напишите скрипт, отображающий папки текущей директории.
 
+print("\nЗадача-2\n")
+
+exist_dirs_lst = [dr for dr in os.listdir(os.getcwd()) if os.path.isdir(dr)]
+
+if len(exist_dirs_lst):
+    print(f"В директории \"{os.getcwd()}\" есть папки:")
+    for dr in exist_dirs_lst:
+        print(dr)
+else:
+    print(f"В директории \"{os.getcwd()} \"нет папок.")
+
 # Задача-3:
 # Напишите скрипт, создающий копию файла, из которого запущен данный скрипт.
