@@ -13,3 +13,36 @@
 # Для решения данной задачи используйте алгоритмы из задания easy,
 # оформленные в виде соответствующих функций,
 # и импортированные в данный файл из easy.py
+
+import easy
+
+command_description_arr = {1: "переход в папку",
+                           3: "удаление папки",
+                           4: "создание папки"}
+
+while True:
+    try:
+        command = int(input("Выберете действие:\n"
+                            "1. Перейти в папку\n"
+                            "2. Просмотреть содержимое текущей папки\n"
+                            "3. Удалить папку\n"
+                            "4. Создать папку\n"
+                            "5. Выйти\n"
+                            ">>"))
+    except ValueError:
+        print("Неизвестная команда. Повторите ввод")
+        continue
+    if command == 5:
+        break
+    elif command == 2:
+        easy.show_dir(easy.cwd())
+    elif command in (1, 3, 4):
+        fold = input(f"Вы выбрали действие - {command_description_arr[command]}. Введите название папки:")
+        if command == 1:
+            easy.change_dir(fold)
+        elif command == 4:
+            easy.make_dir(fold)
+        elif command == 3:
+            easy.del_dir(fold)
+    else:
+        print("Неизвестная команда. Повторите ввод")

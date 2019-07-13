@@ -57,3 +57,29 @@ else:
 
 # Задача-3:
 # Напишите скрипт, создающий копию файла, из которого запущен данный скрипт.
+
+print("\nЗадача-3\n")
+
+import shutil
+import sys
+
+
+# Ищем первое свободное имя вида copy_n_имя_файла_из_которого_запущен_скрипт
+def free_name():
+    max_num = 0
+    for file_name in [fn for fn in os.listdir(os.getcwd()) if os.path.isfile(fn)]:
+        try:
+            start_file_name, num, end_file_name = file_name.split("_")
+            if start_file_name != "copy" and end_file_name != os.path.basename(sys.argv[0]):
+                continue
+            num = int(num)
+            if num > max_num:
+                max_num = num
+        except ValueError:
+            pass
+    return f"copy_{max_num+1}_{os.path.basename(sys.argv[0])}"
+
+
+new_file_name = free_name()
+shutil.copyfile(os.path.basename(sys.argv[0]), new_file_name)
+print(f"Создана копия файла с именем {new_file_name}")
