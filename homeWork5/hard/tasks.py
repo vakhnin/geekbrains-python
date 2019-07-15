@@ -28,6 +28,7 @@ def print_help():
     print("ping - тестовый ключ")
     print("ls - отоброжение полного пути")
     print("cp - копия файла")
+    print("rm - удаление файла")
 
 
 def make_dir():
@@ -57,6 +58,9 @@ def copy_file():
     elif not name2:
         print("Необходимо указать имя файла в который копируем третьем параметром")
         return
+    elif os.path.exists(name2):
+        print(f"Файл с именем {name2} уже существует")
+        return
     try:
         shutil.copy(name1, name2)
         print(f'Копия файла {name1} с именем {name2} создана')
@@ -64,12 +68,27 @@ def copy_file():
         print(f'Файла {name1} не существует')
 
 
+def rm_file():
+    if not name1:
+        print("Необходимо указать имя удаляемого файла вторым параметром")
+        return
+    elif not os.path.exists(name1):
+        print(f"Файла с именем {name1} не существует")
+        return
+    try:
+        os.remove(name1)
+        print(f'Файл с именем {name1} удален')
+    except OSError:
+        print(f'Ошибка! Файл с именем {name1} не удален')
+
+
 do = {
     "help": print_help,
     "mkdir": make_dir,
     "ping": ping,
     "ls": ls,
-    "cp": copy_file
+    "cp": copy_file,
+    "rm": rm_file
 }
 
 try:
