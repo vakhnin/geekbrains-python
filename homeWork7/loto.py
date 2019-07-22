@@ -81,6 +81,14 @@ class Card:
             card.append(row)
         return card
 
+    def print_card(self):
+        for line in self.card:
+            tmp_str = ""
+            for item in line:
+                tmp_str += "{:>3}".format(item)
+            print(tmp_str)
+
 
 card = Card()
 print(card.card)
+card.print_card()
