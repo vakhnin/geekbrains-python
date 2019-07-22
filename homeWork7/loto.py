@@ -78,6 +78,11 @@ class Card:
             for j in range(5):
                 row.append(Card.rand_elem_from_list(lst))
             row.sort()
+
+            blanks_lst = [i + 1 for i in range(9)]
+            for j in range(4):
+                row.insert(Card.rand_elem_from_list(blanks_lst), " "*3)
+
             card.append(row)
         return card
 
@@ -104,11 +109,12 @@ class Game:
 
         if barrel in (item for sublist in self.computer_card.card for item in sublist):
             self._del_number_from_card(self.computer_card.card, barrel)
+        print("-- Карточка компьютера --")
         self.computer_card.print_card()
+        print("-" * 25)
 
     @staticmethod
     def _del_number_from_card(card, barrel):
-        print(card)
         for i in range(3):
             if barrel in card[i]:
                 card[i][card[i].index(barrel)] = "  -"
