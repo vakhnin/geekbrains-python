@@ -85,10 +85,42 @@ class Card:
         for line in self.card:
             tmp_str = ""
             for item in line:
-                tmp_str += "{:>3}".format(item)
+                if type(item) == int:
+                    tmp_str += "{:>3}".format(item)
+                else:
+                    tmp_str += item
             print(tmp_str)
 
 
-card = Card()
-print(card.card)
-card.print_card()
+class Game:
+    def __init__(self):
+        self.computer_card = Card()
+        self.player_card = Card()
+        self.barrels = [i + 1 for i in range(90)]
+
+    def _turn(self):
+        barrel = Card.rand_elem_from_list(self.barrels)
+        print(f"Новый бочонок: {barrel} (осталось {len(self.barrels)})")
+
+        if barrel in (item for sublist in self.computer_card.card for item in sublist):
+            self._del_number_from_card(self.computer_card.card, barrel)
+        self.computer_card.print_card()
+
+    @staticmethod
+    def _del_number_from_card(card, barrel):
+        print(card)
+        for i in range(3):
+            if barrel in card[i]:
+                card[i][card[i].index(barrel)] = "  -"
+                return
+
+
+
+    def start(self):
+        while True:
+            self._turn()
+            input("")
+
+
+new_game = Game()
+new_game.start()
