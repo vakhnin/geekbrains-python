@@ -107,21 +107,40 @@ class Game:
         barrel = Card.rand_elem_from_list(self.barrels)
         print(f"Новый бочонок: {barrel} (осталось {len(self.barrels)})")
 
+        print("------ Ваша карточка -----")
+        self.player_card.print_card()
+        print("-" * 26)
+
         if barrel in self._in_one_dim_list(self.computer_card):
-            self._del_number_from_card(self.computer_card.card, barrel)
+            self._del_number_from_card(self.computer_card, barrel)
         print("-- Карточка компьютера ---")
         self.computer_card.print_card()
         print("-" * 26)
+
+        if input("Зачеркнуть цифру? (y/n)") == "y":
+            if barrel not in self._in_one_dim_list(self.player_card):
+                print("Вы проиграли.")
+                return True
+            else:
+                self._del_number_from_card(self.player_card, barrel)
+        else:
+            if barrel in self._in_one_dim_list(self.player_card):
+                print("Вы проиграли.")
+                return True
+        if self._card_full_fill(self.player_card):
+            print("Вы выйграли!")
+            return True
         if self._card_full_fill(self.computer_card):
-            print("Победил кмопьютер.")
+            print("Вы проиграли.")
             return True
 
     @staticmethod
-    def _in_one_dim_list(lst):
-        return (item for sublist in lst.card for item in sublist)
+    def _in_one_dim_list(card):
+        return [item for sublist in card.card for item in sublist]
 
     @staticmethod
-    def _del_number_from_card(card, barrel):
+    def _del_number_from_card(card1, barrel):
+        card = card1.card
         for i in range(3):
             if barrel in card[i]:
                 card[i][card[i].index(barrel)] = " -"
@@ -135,13 +154,10 @@ class Game:
                     return False
         return True
 
-
-
     def start(self):
         while True:
             if self._turn():
                 return
-            input("")
 
 
 new_game = Game()
