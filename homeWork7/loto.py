@@ -107,24 +107,40 @@ class Game:
         barrel = Card.rand_elem_from_list(self.barrels)
         print(f"Новый бочонок: {barrel} (осталось {len(self.barrels)})")
 
-        if barrel in (item for sublist in self.computer_card.card for item in sublist):
+        if barrel in self._in_one_dim_list(self.computer_card):
             self._del_number_from_card(self.computer_card.card, barrel)
-        print("-- Карточка компьютера --")
+        print("-- Карточка компьютера ---")
         self.computer_card.print_card()
-        print("-" * 25)
+        print("-" * 26)
+        if self._card_full_fill(self.computer_card):
+            print("Победил кмопьютер.")
+            return True
+
+    @staticmethod
+    def _in_one_dim_list(lst):
+        return (item for sublist in lst.card for item in sublist)
 
     @staticmethod
     def _del_number_from_card(card, barrel):
         for i in range(3):
             if barrel in card[i]:
-                card[i][card[i].index(barrel)] = "  -"
+                card[i][card[i].index(barrel)] = " -"
                 return
+
+    @staticmethod
+    def _card_full_fill(card):
+        for line in card.card:
+            for item in line:
+                if type(item) == int:
+                    return False
+        return True
 
 
 
     def start(self):
         while True:
-            self._turn()
+            if self._turn():
+                return
             input("")
 
 
